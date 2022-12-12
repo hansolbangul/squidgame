@@ -1,0 +1,57 @@
+body {
+	margin: 0;
+}
+
+#three-canvas {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+div {
+	position: absolute;
+	padding-top: 70px;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+	z-index: 10;
+	top: -120%;
+	text-align: center;
+
+	transition: all 0.3s ease;
+}
+
+h2 {
+	font-size: 60px;
+	font-weight: bold;
+	color: #fff;
+	margin-bottom: 10px;
+
+}
+
+button {
+	font-weight: bold;
+	border: none;
+	font-size: 24px;
+	border-radius: 12px;
+	padding: 6px 12px;
+	background-color: #fff;
+}
+
+@keyframes rotate_image {
+	33% {
+		transform: rotate(-20deg);
+	}
+
+	66% {
+		transform: rotate(20deg);
+	}
+
+	100% {
+		transform: rotate(0);
+	}
+}
