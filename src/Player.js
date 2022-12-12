@@ -12,7 +12,7 @@ export class Player extends Stuff {
 
 
         cm1.gltfLoader.load(
-            '/models/ilbuni.glb',
+            './models/ilbuni.glb',
             glb => {
                 // shadow
                 glb.scene.traverse(child => {

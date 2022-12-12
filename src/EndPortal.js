@@ -12,7 +12,7 @@ export class EndPortal extends Stuff {
 
 
         cm1.gltfLoader.load(
-            '/models/marshal.glb',
+            './models/marshal.glb',
             glb => {
                 // shadow
                 glb.scene.traverse(child => {

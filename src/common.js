@@ -66,10 +66,10 @@ export const mat = {
 }
 
 const normalSound = new Audio();
-normalSound.src = '/sounds/Crash.mp3'
+normalSound.src = './sounds/Crash.mp3'
 
 const strongSound = new Audio();
-strongSound.src = '/sounds/Hit.mp3'
+strongSound.src = './sounds/Hit.mp3'
 
 export const sounds = {
     strong: strongSound,
