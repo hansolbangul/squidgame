@@ -14,6 +14,7 @@ import { EndPortal } from './EndPortal';
 // ----- 주제: The Bridge 게임 만들기
 
 const button = document.querySelectorAll('#reset');
+const div = document.querySelector('#clear');
 
 // Renderer
 const canvas = document.querySelector('#three-canvas');
@@ -233,24 +234,22 @@ const portal = new EndPortal({
 objects.push(portal);
 
 // RayCaster
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
-function checkIntersects() {
-	raycaster.setFromCamera(mouse, camera);
-	const intersects = raycaster.intersectObjects(cm1.scene.children);
+// const raycaster = new THREE.Raycaster();
+// const mouse = new THREE.Vector2();
+// function checkIntersects() {
+// 	raycaster.setFromCamera(mouse, camera);
+// 	const intersects = raycaster.intersectObjects(cm1.scene.children);
 
-	if (intersects[0].object.name === 'Object_12') {
-		const div = document.querySelectorAll('#clear');
+// 	const div = document.querySelectorAll('#clear');
 
-		div[0].style.top = '0%';
+// 	div[0].style.top = '0%';
 
-		const timerId = setTimeout(() => {
-			div[0].style.animation = 'rotate_image 6s linear infinite';
+// 	const timerId = setTimeout(() => {
+// 		div[0].style.animation = 'rotate_image 6s linear infinite';
 
-			clearTimeout(timerId);
-		}, 1000);
-	}
-}
+// 		clearTimeout(timerId);
+// 	}, 1000);
+// }
 
 // 그리기
 const clock = new THREE.Clock();
@@ -284,13 +283,16 @@ function draw() {
 
 	objects.forEach(item => {
 		if (item.name === 'pillar1' && item.cannonBody?.mesh.isEnd) {
-			const portal = objects.find(item => item.name === 'portal');
-			portal.modelMesh.visible = true;
-		}
 
-		if (item.modelMesh && item.name === 'portal') {
-			item.modelMesh.rotation.z += 0.01;
-		} else if (item.cannonBody) {
+			div.style.top = '0%';
+
+			const timerId = setTimeout(() => {
+				div.style.animation = 'rotate_image 6s linear infinite';
+
+				clearTimeout(timerId);
+			}, 1000);
+		}
+		if (item.cannonBody) {
 			if (item.name === 'player') {
 				player.modelMesh.position.copy(player.cannonBody.position);
 			} else {
@@ -305,6 +307,7 @@ function draw() {
 
 			}
 		}
+
 	})
 
 	if (player.modelMesh) {
@@ -312,11 +315,22 @@ function draw() {
 		player.cannonBody.position.y += velocity_y * delta;
 		if (jumpCan === 0) {
 			velocity_y -= 9.8 * 2 * delta;
-			if (player.cannonBody.position.y <= play.height) {
+			if (9.9 <= player.cannonBody.position.y && player.cannonBody.position.y <= play.height) {
 				jumpCan = 1;
 				velocity_y = 0;
 				player.cannonBody.position.y = play.height;
 			}
+		} else if (player.cannonBody.position.y < 5.9) {
+			setTimeout(() => {
+				div.style.top = '0%';
+
+				const timerId = setTimeout(() => {
+					div.style.animation = 'rotate_image 6s linear infinite';
+
+					clearTimeout(timerId);
+				}, 1000);
+
+			}, 4000)
 		}
 
 		camera.position.set(player.modelMesh.position.x, player.modelMesh.position.y + 7, player.modelMesh.position.z + 6);
@@ -332,7 +346,6 @@ function draw() {
 // 움직이기
 let keyPress = {};
 function keyDown(e) {
-	console.log(e)
 	keyPress[e.keyCode] = true;
 };
 function ketUp(e) {
@@ -354,11 +367,11 @@ button[0].addEventListener('click', () => {
 	window.location.reload();
 })
 
-canvas.addEventListener('click', e => {
-	if (PreventDragClick.mouseMoved) return;
-	mouse.x = e.clientX / canvas.clientWidth * 2 - 1;
-	mouse.y = -(e.clientY / canvas.clientHeight * 2 - 1);
-	checkIntersects();
-});
+// canvas.addEventListener('click', e => {
+// 	if (PreventDragClick.mouseMoved) return;
+// 	mouse.x = e.clientX / canvas.clientWidth * 2 - 1;
+// 	mouse.y = -(e.clientY / canvas.clientHeight * 2 - 1);
+// 	checkIntersects();
+// });
 
 draw();

@@ -29,7 +29,7 @@ export class Pillars extends Stuff {
         this.cannonBody.addEventListener('collide', endPortal);
 
         function endPortal(e) {
-            if (e.target.mesh.name === 'pillar1' && !e.target.mesh.isEnd) {
+            if (e.target.mesh.name === 'pillar1') {
                 e.target.mesh.isEnd = true;
             }
         }

@@ -44,6 +44,8 @@ export class Player extends Stuff {
                 this.actions[0].play();
 
                 this.setCannonBody();
+
+                this.cannonBody.mesh = this.modelMesh;
             }
         );
 
